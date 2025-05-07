@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wakroel Photowork</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4 url('5.png') no-repeat center center;
+      background-size: 60%;
+      background-attachment: fixed;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .logo {
+      max-width: 300px;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      color: #333;
+      font-size: 32px;
+      min-height: 40px;
+      border-right: 3px solid #333;
+      white-space: nowrap;
+      overflow: hidden;
+      display: inline-block;
+    }
+
+    .paket-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .paket {
+      padding: 20px;
+      border-radius: 10px;
+      width: 270px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      position: relative;
+      color: white;
+    }
+
+    .paket.basic {
+      background: #28a745;
+    }
+
+    .paket.premium {
+      background: #ffc107;
+      color: black;
+    }
+
+    .paket.eksklusif {
+      background: #dc3545;
+    }
+
+    .paket button {
+      margin-top: 10px;
+      padding: 10px;
+      background: #007b5e;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .paket button .arrow {
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    .paket button.open .arrow {
+      transform: rotate(90deg);
+    }
+
+    .detail {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease, padding 0.3s ease;
+      text-align: left;
+    }
+
+    .detail.open {
+      max-height: 500px;
+      padding-top: 10px;
+    }
+
+    .detail ul {
+      padding-left: 20px;
+    }
+
+    .bold {
+      font-weight: bold;
+    }
+
+    .whatsapp-btn {
+      background: #25D366;
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <img src="5.png" alt="Logo Wakroel Photowork" class="logo" />
+  <h1 id="judul"></h1>
+
+  <audio id="clickSound" src="klik.mp3" preload="auto"></audio>
+
+  <div class="paket-container">
+    <div class="paket basic">
+      <h2>Paket Basic</h2>
+      <button onclick="toggleDetail('basic', this)">
+        Lihat Isi Paket <span class="arrow">▶</span>
+      </button>
+      <div id="basic" class="detail">
+        <ul>
+          <li>Akat Nikah</li>
+          <li>Prewedding</li>
+          <li>Preh Linto</li>
+          <li>Pesta</li>
+        </ul>
+        <p class="bold">Cetak foto ukuran 24 inci, bingkai 1 buah, dan 1 album jumbo isi 40 lembar</p>
+        <a href="https://wa.me/6281362515287?text=Halo%2C+saya+ingin+memesan+Paket+Basic+Wakroel+Photowork" class="whatsapp-btn" target="_blank">Pesan via WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="paket premium">
+      <h2>Paket Premium</h2>
+      <button onclick="toggleDetail('premium', this)">
+        Lihat Isi Paket <span class="arrow">▶</span>
+      </button>
+      <div id="premium" class="detail">
+        <ul>
+          <li>Akat Nikah</li>
+          <li>Prewedding</li>
+          <li>Preh Linto</li>
+          <li>Pesta</li>
+          <li>Antar Dara Baro</li>
+        </ul>
+        <p class="bold">Cetak foto ukuran 24 inci, bingkai 2 buah, dan 1 album jumbo isi 80 lembar</p>
+        <a href="https://wa.me/6281362515287?text=Halo%2C+saya+ingin+memesan+Paket+Premium+Wakroel+Photowork" class="whatsapp-btn" target="_blank">Pesan via WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="paket eksklusif">
+      <h2>Paket Eksklusif</h2>
+      <button onclick="toggleDetail('eksklusif', this)">
+        Lihat Isi Paket <span class="arrow">▶</span>
+      </button>
+      <div id="eksklusif" class="detail">
+        <ul>
+          <li>Akat Nikah</li>
+          <li>Prewedding</li>
+          <li>Preh Linto</li>
+          <li>Pesta</li>
+          <li>Antar Dara Baro</li>
+        </ul>
+        <p class="bold">Cetak foto ukuran 24 inci, bingkai 2 buah, dan 1 album jumbo isi 120 lembar</p>
+        <a href="https://wa.me/6281362515287?text=Halo%2C+saya+ingin+memesan+Paket+Eksklusif+Wakroel+Photowork" class="whatsapp-btn" target="_blank">Pesan via WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleDetail(id, button) {
+      const detail = document.getElementById(id);
+      const audio = document.getElementById('clickSound');
+
+      detail.classList.toggle("open");
+      button.classList.toggle("open");
+
+      if (audio) {
+        audio.currentTime = 0;
+        audio.play();
+      }
+    }
+
+    const judul = "Wakroel Photowork";
+    let i = 0;
+    const speed = 100;
+
+    function typeWriter() {
+      if (i < judul.length) {
+        document.getElementById("judul").innerHTML += judul.charAt(i);
+        i++;
+        setTimeout(typeWriter, speed);
+      }
+    }
+
+    window.onload = typeWriter;
+  </script>
+
+</body>
+</html>
